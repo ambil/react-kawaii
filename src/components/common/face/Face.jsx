@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import paths from './paths';
 
-const Face = ({ mood, uniqueId, ...rest }) => (
+const Face = ({ blushColor, eyeColor, mood, mouthColor, uniqueId, ...rest }) => (
   <g id="kawaii-face" {...rest}>
     <defs>
       <path d={paths.defs} id="kawaii-face__path-1" />
@@ -18,13 +18,13 @@ const Face = ({ mood, uniqueId, ...rest }) => (
           </mask>
           <use
             id="Combined-Shape"
-            fill="#000000"
+            fill={mouthColor || "#000000"}
             xlinkHref="#kawaii-face__path-1"
           />
           <path
             d={paths.tongue}
             id="kawaii-face__tongue"
-            fill="#E74144"
+            fill={mouthColor || "#E74144"}
             mask={`url(#kawaii-face__mask-2-${uniqueId}`}
             transform="translate(15.000000, 11.431885) scale(1, -1)
             translate(-15.000000, -11.431885)"
@@ -32,7 +32,7 @@ const Face = ({ mood, uniqueId, ...rest }) => (
         </g>
       )}
       {mood === 'happy' && (
-        <path d={paths.happy} id="kawaii-face__mouth__happy" fill="#000000" />
+        <path d={paths.happy} id="kawaii-face__mouth__happy" fill={mouthColor || "#000000"}  />
       )}
       {mood === 'shocked' && (
         <ellipse
@@ -41,14 +41,14 @@ const Face = ({ mood, uniqueId, ...rest }) => (
           cy="14"
           rx="9"
           ry="10"
-          fill="#000000"
+          fill={mouthColor || "#000000"}
         />
       )}
       {mood === 'sad' && (
         <path
           d={paths.sad}
           id="kawaii-face__mouth__sad"
-          fill="#000000"
+          fill={mouthColor || "#000000"}
           transform="translate(14.999999, 5.500000) scale(1, -1) translate(-14.999999, -5.500000)"
         />
       )}
@@ -56,7 +56,7 @@ const Face = ({ mood, uniqueId, ...rest }) => (
     <g
       id="kawaii-face__blush"
       transform="translate(0.000000, 15.000000)"
-      fill="#000000"
+      fill={blushColor || "#000000"}
       opacity="0.2"
     >
       <circle id="Oval" cx="3" cy="3" r="3" />
@@ -65,7 +65,7 @@ const Face = ({ mood, uniqueId, ...rest }) => (
     <g
       id="kawaii-face__eyes"
       transform="translate(2.000000, 0.000000)"
-      fill="#000000"
+      fill={eyeColor|| "#000000"}
     >
       {mood === 'blissful' && (
         <g
